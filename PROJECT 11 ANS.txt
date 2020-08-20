@@ -1,0 +1,152 @@
+ // You can find all animations in  the animation tab 
+   
+    var scene = createSprite(200,200,800,400);
+    scene.setAnimation("sunshine_showers_1");
+    scene.velocityX=-2;
+    scene.scale=2;
+    scene.x=scene.width/2;
+    
+    var arrow = createSprite(335,155,10,10);
+    arrow.setAnimation("arrow");
+     
+    var bow = createSprite(335,155,10,10);
+    bow.setAnimation("bow");
+     
+    var score=0;
+   
+  
+    var blue2;
+    var yellow1;
+    var green1;
+    var red1;
+    
+function draw() {
+    
+    
+    background("white");
+    textSize(30);
+    text("score="+score,236,352);
+    bow.y= World.mouseY;
+    arrow.y=bow.y;
+      
+    
+    
+    if (scene.x<0){
+      scene.x=scene.width/2;
+    }
+     
+    if (keyDown("space")){
+      
+      serve();
+      reset();
+      playSound("sound://category_slide/animation_whoosh10.mp3");
+    }
+   
+    var select_balloon = randomNumber(1,4);
+      
+    if (World.frameCount%80===0){
+        if(select_balloon===1){
+          blue();
+         }
+        if(select_balloon===2){
+          red();
+        }
+        if(select_balloon===3){
+          green();
+        }
+        if(select_balloon===4){
+          yellow();
+        }
+     
+       }
+      
+     //console.log(score.depth);
+      
+     if (blue2 && arrow.isTouching(blue2)){
+        blue2.lifetime = -1;
+        blue2.destroy();
+        score = score+1;
+      }
+      
+     if (red1 && arrow.isTouching(red1)){
+        red1.lifetime = -1;
+        red1.destroy();
+        score = score+1;
+      }
+     
+  
+      if (green1 && arrow.isTouching(green1)){
+        green1.lifetime = -1;
+        green1.destroy();
+        score = score+1;
+      }
+        
+      
+      if (yellow1 && arrow.isTouching(yellow1)){
+        yellow1.lifetime = -1;
+        yellow1.destroy();
+        score = score+1;
+      }
+    
+   
+      
+      if (score === 2){
+        textSize(20);
+        text ("YOUR SCORE ="+score+" "+"GAME OVER",74,170);
+        arrow.velocityX = 0;
+        arrow.destroy();
+        bow.destroy();
+        scene.velocityX=0;
+        
+        }
+      
+    
+      
+      drawSprites();
+} 
+
+
+function reset(){
+   arrow.x=bow.x;
+   arrow.y=bow.y;
+}
+
+
+  
+
+function serve() {
+   arrow.velocityX =-33;
+}
+
+function blue (){
+  
+  blue2 = createSprite(62,randomNumber(20,370),10,10) ;
+  blue2.setAnimation("blue");
+  blue2.lifetime=150;
+}
+function red (){
+  
+  red1 = createSprite(62,randomNumber(20,370),10,10) ;
+  red1.setAnimation("red");
+  red1.lifetime=150;
+  
+  
+}
+
+function green (){
+  
+  green1 = createSprite(62,randomNumber(20,370),10,10) ;
+  green1.setAnimation("green");
+  green1.lifetime=150;
+  
+  
+}
+
+function yellow (){
+  
+  yellow1 = createSprite(62,randomNumber(20,370),10,10) ;
+  yellow1.setAnimation("yellow");
+  yellow1.lifetime=150;
+
+}
+c
